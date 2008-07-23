@@ -1,0 +1,1 @@
+connect 'xmlrpc', :controller  => "backend", :action => "xmlrpc" 
