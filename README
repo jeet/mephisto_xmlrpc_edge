@@ -1,33 +1,34 @@
 = MephistoXmlrpc
 
 
-T
-
 == Configuration
+ install the plugin using script/pugin
 
-1. Point your web browser to your Mephisto installations plugin administration interface for this plugin (e.g. http://mysite.com/admin/plugins/show/sitemap).
-2. Set the "Site uri" option to your web site's root url (e.g. http://mysite.com).
-3. That's it, there is no step 3.
+follow these steps
 
-Other optional attributes you can change in MephistoGoogleSiteMap to affect how you inform google to index your site are:
+1:  edit file app/controllers/application/error.rb
 
-  Home frequency    # the frequency of indexing your home page (plugin default is daily)
-  Blog frequency    # the frequency of indexing a blog based page (plugin default is daily)
-  Page frequency    # the frequency of indexing a page page (plugin default is weekly)
-  Home priority     # priority of your sites index page to google's bot (plugin default is 0.9)
-  Article priority  # priority of all other pages to google's bot (plugin default is 0.5)
+locate these lines 
 
-To learn more about the values and properties these attributes represent, see:
+rescue_from ActiveRecord::RecordNotFound,        :with =&gt; :render_admin_not_found
+rescue_from ActionController::UnknownController, :with =&gt; :render_admin_not_found
+rescue_from ActionController::UnknownAction,     :with =&gt; :render_admin_not_found
 
-http://www.sitemaps.org/protocol.php#xmlTagDefinitions
+change these lines to
 
-== Inform the Search Engines
+rescue_from ::ActiveRecord::RecordNotFound,        :with =&gt; :render_admin_not_found
+rescue_from ::ActionController::UnknownController, :with =&gt; :render_admin_not_found
+rescue_from ::ActionController::UnknownAction,     :with =&gt; :render_admin_not_found
 
-finally, for any of this to be useful, you'll want to ensure the various search engines are notified of the presence of your sitemap (which will be at http://your.domain.com/sitemap.xml).  You can learn more about notifying search engines of your sitemaps location here:
+save the file .
 
-http://www.sitemaps.org/protocol.php#informing
+2:  checkout action web service from svn repo. into vendor/rails folder.     
 
+svn co    http://svn.rubyonrails.org/rails/ousted/actionwebservice/
 
+3.  restart your server 
+
+Now you have working xmlrpc service at your server .
 
 ==BUGS
 
